@@ -7,6 +7,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+
+    public function scores(){
+        return $this->hasMany('App\Score');
+    }
+    public function friends(){
+        return $this->hasMany('App\Friend');
+    }
+
     use Notifiable;
 
     /**
