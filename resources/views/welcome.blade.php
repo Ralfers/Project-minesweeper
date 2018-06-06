@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Minesweeper</title>
-    </head>
-    <body>
-        Minesweeper
-    </body>
-</html>
+@extends('layouts.app')
+@section('content')
+
+<div class="game-section" >
+        centered content
+</div>
+@endsection
