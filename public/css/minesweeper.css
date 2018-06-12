@@ -1,0 +1,12 @@
+#minesweeper .cell {
+	display: inline-block;
+	width: 2rem;
+	height: 2rem;
+	margin: 3px;
+	border: 1px solid black;
+	text-align: center;
+	padding-top: 2px;
+}
+#minesweeper .cell.covered {
+	background: rgb(191, 192, 193);
+}

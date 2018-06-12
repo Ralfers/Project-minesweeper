@@ -12,7 +12,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Score');
     }
     public function friends(){
-        return $this->hasMany('App\Friend');
+        return $this->belongsToMany('App\User', 'friends', 'user_id', 'friend_id');
     }
 
     use Notifiable;

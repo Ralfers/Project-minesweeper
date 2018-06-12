@@ -11,6 +11,8 @@
     <title>Minesweeper</title>
 
     <!-- Scripts -->
+    <script src="{{ asset('js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{ asset('js/minesweeper.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -19,6 +21,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/minesweeper.css') }}" rel="stylesheet">
     <style>
         .mr-auto li a{
             text-decoration: none;
