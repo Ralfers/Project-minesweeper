@@ -1,7 +1,7 @@
 class Minesweeper {
 
 	constructor() {
-		this.size = 10;
+		this.size = 3;
 		this.time = 120;
 		this.mineCount = Math.ceil(this.size * 1.5);
 		this.mines = [];
@@ -67,13 +67,15 @@ class Minesweeper {
 				this.playing = false;
 				this.ended = true;
 				this.result.html('Congratulations! You lost!');
+				jQuery.post('/scores', {score: 0, "_token": jQuery('#token').val()})
 			}
 			else{
 				this.cleared++;
 				if(this.cleared == this.size*this.size - this.mineCount){
 					this.playing = false;
 					this.ended = true;
-					this.result.html('Congratulations! You Won!')
+					this.result.html('Congratulations! You Won!');
+					jQuery.post('/scores', {score: this.time, "_token": jQuery('#token').val()})
 				}
 			}
 		}
@@ -133,6 +135,7 @@ class Minesweeper {
 				this.ended = true;
 				this.playing = false;
 				this.result.html('Congratulations! You lost!');
+				jQuery.post('/scores', {score: 0, "_token": jQuery('#token').val()})
 			}
 		}
 	}
