@@ -22,24 +22,30 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/minesweeper.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/show_scores.css') }}" rel="stylesheet">
     <style>
         .mr-auto li a{
             text-decoration: none;
             color: grey;
             padding-left: 25px;
         }
-        .game-section {
+        .padded-content {
             width:1000px;
             margin:0 auto;
             border-radius: 2px;
             border-style: solid;
             border-color: rgba(192,192,192,50);
             border-width: 2px;
+            padding: 14px;
+        }
+        .user-content {
+            display: inline-block;
         }
     </style>
 </head>
 <body>
     <div id="app">
+        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -66,6 +72,11 @@
                         </li>
                         <li>
                             <a href="{{ url('/seed') }}">Enter a seed</a>
+                        </li>
+                        <li>
+                            @if(Auth::user())
+                                <a href="{{ url('/users/'.Auth::user()->id) }}">Profile page</a>
+                            @endif
                         </li>
                     </ul>
 
@@ -104,7 +115,9 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="padded-content">
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>
