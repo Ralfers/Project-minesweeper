@@ -59,7 +59,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li>
-                            <a href="{{ url('/') }}">Play a random game</a>
+                            <a href="{{ url('/game') }}">Play a random game</a>
                         </li>
                         <li>
                             <a href="{{ url('/daily') }}">Daily challange</a>

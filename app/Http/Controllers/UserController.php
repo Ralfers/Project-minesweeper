@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user-search');
+        return view('user_search');
     }
 
     public function search()
@@ -61,20 +61,40 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        
+        $currentUser = User::FindOrFail($id);
+
         $gameQuery = Score::where('user_id', $id);
         $games = $gameQuery->orderBy('id', 'desc')->take(10)->get();
         $add = true;
+        $editable = false;
         if($id == Auth::user()->id){
             $add = false;
+            $editable = true;
         }
+
+        $friendIds = User::FindOrFail(Auth::user()->id)->friends()->pluck('friend_id')->toArray();
+        if(in_array($id, $friendIds)){
+            $add = false;
+        }        
+
+        $link = $currentUser->avatar;
+        if(!$link){
+            $link = 'https://thesocietypages.org/socimages/files/2009/05/nopic_192.gif';
+        }
+
         $count = $gameQuery->count();
+
+        $friendIds = $currentUser->friends()->where('friend_id', '!=', $id)->pluck('friend_id')->toArray();
+        $friends = User::whereIn('id', $friendIds)->get();
 
         return view('profile_page', array(
             'games' => $games,
             'count' => $count,
             'add' => $add,
-            'user_id' => $id
+            'editable' => $editable,
+            'user_id' => $id,
+            'friends' => $friends,
+            'link' => $link
         ));
     }
 
@@ -84,6 +104,22 @@ class UserController extends Controller
         $friend = User::FindOrFail($friend_id);
         $user = User::find(Auth::user()->id);
         $user->friends()->attach($friend_id);
+    }
+
+    public function changeAvatar()
+    {
+        $link = Input::post('link');
+        $user = Auth::user();
+        $user->avatar = $link;
+        $user->save();
+    }
+
+    public function changeHome()
+    {
+        $home = Input::post('home');
+        $user = Auth::user();
+        $user->homepage = $home;
+        $user->save();
     }
 
     /**

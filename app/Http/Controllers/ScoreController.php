@@ -18,11 +18,19 @@ class ScoreController extends Controller
     public function index()
     {
         $userId = Auth::user()->id;
-        $userScores = Score::where('user_id', $userId)->get();
-        $friendIds = User::FindOrFail($userId)->friends()->pluck('friend_id')->toArray();
-        $friendScores = Score::whereIn('user_id', $friendIds)->orderBy('id', 'desc')->take(10)->get();
+        $userRole = Auth::user()->role;
 
-        return view('show_scores', array('scores' => $userScores, 'friendScores' => $friendScores));
+        $ownScores = Score::where('user_id', $userId)->orderBy('id', 'desc')->take(10)->get();
+
+        if($userRole != 1){
+            $userIds = User::FindOrFail($userId)->friends()->pluck('friend_id')->toArray();
+            $userScores = Score::whereIn('user_id', $userIds)->orderBy('id', 'desc')->take(10)->get();
+        }
+        else{
+            $userScores = Score::orderBy('id', 'desc')->get();
+        }
+
+        return view('show_scores', array('scores' => $ownScores, 'userScores' => $userScores));
     }
 
     /**
@@ -47,7 +55,7 @@ class ScoreController extends Controller
         $score = new Score();
         $score->user_id = Auth::user()->id;
         $score->score = $request->input('score');
-        $score->is_daily = false;
+        $score->is_daily = $request->input('daily');
 
         $score->save();
     }
@@ -94,6 +102,6 @@ class ScoreController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Score::FindOrFail($id)->delete();
     }
 }

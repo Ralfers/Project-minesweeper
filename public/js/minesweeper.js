@@ -1,7 +1,15 @@
 class Minesweeper {
 
-	constructor() {
-		this.size = 3;
+	constructor(seed, store, daily) {
+		this.daily = daily;
+		this.store = store;
+		this.seed = seed;
+		if(!this.seed && this.daily){
+			var date = new Date();
+			this.seed = date.toDateString();
+		}
+		console.log(this.seed);
+		this.size = 10;
 		this.time = 120;
 		this.mineCount = Math.ceil(this.size * 1.5);
 		this.mines = [];
@@ -67,7 +75,9 @@ class Minesweeper {
 				this.playing = false;
 				this.ended = true;
 				this.result.html('Congratulations! You lost!');
-				jQuery.post('/scores', {score: 0, "_token": jQuery('#token').val()})
+				if(this.store){
+					jQuery.post('/scores', {score: 0, daily: this.daily, "_token": jQuery('#token').val()});
+				}
 			}
 			else{
 				this.cleared++;
@@ -75,7 +85,9 @@ class Minesweeper {
 					this.playing = false;
 					this.ended = true;
 					this.result.html('Congratulations! You Won!');
-					jQuery.post('/scores', {score: this.time, "_token": jQuery('#token').val()})
+					if(this.store){
+						jQuery.post('/scores', {score: this.time, daily: this.daily, "_token": jQuery('#token').val()});
+					}
 				}
 			}
 		}
@@ -99,14 +111,13 @@ class Minesweeper {
 	makeGame() {
 		var board = Array(this.size * this.size);
 		board.fill(0, 0, this.size * this.size);
-		var seed = '123';
 
 		var i = 0;
 		var j = 0;
 		while(j < this.mineCount){
-			var index = this.generateNumber(seed+i);
+			var index = this.generateNumber(this.seed+i);
 			if(board[index] == '*'){
-				i++
+				i++;
 				continue;
 			}
 			board[index] = '*';
@@ -135,7 +146,9 @@ class Minesweeper {
 				this.ended = true;
 				this.playing = false;
 				this.result.html('Congratulations! You lost!');
-				jQuery.post('/scores', {score: 0, "_token": jQuery('#token').val()})
+				if(this.store){
+					jQuery.post('/scores', {score: 0, daily: this.daily, "_token": jQuery('#token').val()});
+				}
 			}
 		}
 	}

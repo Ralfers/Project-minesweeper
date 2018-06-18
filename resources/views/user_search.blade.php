@@ -7,7 +7,6 @@
 	<input type='button' value='Search' onclick="searchUser()">
 
 	<script>	
-
 		function searchUser(){
 			var username = jQuery('#username').val();
 			jQuery.get('users/search?username='+username, (data) => {
