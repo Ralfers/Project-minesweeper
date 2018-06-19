@@ -33,7 +33,7 @@
 	</div>
 	<div class='user-content'>
 		@if($add)
-			<input type='button' value='Add friend' onclick='addFriend()'>
+			<input type='button' value='@lang('profile-page.Add')' onclick='addFriend()'>
 		@endif
 	</div>
 	<div class='user-content'>

@@ -2,6 +2,9 @@ class Minesweeper {
 
 	constructor(seed, store, daily) {
 		this.daily = daily;
+		if(!this.daily){
+			this.daily = 0;
+		}
 		this.store = store;
 		this.seed = seed;
 		if(!this.seed && this.daily){

@@ -4,11 +4,12 @@
 		
 		'GP' => 'Spēļu skaits',
 		'Recent' => 'Pēdējās spēles',
-		'F' => 'Draugi:',
+		'F' => 'Draugi',
 		'Change' => 'Nomainīt profila bildi',
 		'Select' => 'Izvēlēties kas tiek rādīts sākuma lapā',
 		'Submit' => 'Apstiprināt',
-		'Save' => 'Saglabāt'
+		'Save' => 'Saglabāt',
+		'Add' => 'Pievienot'
 	]
 
 ?>

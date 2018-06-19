@@ -8,7 +8,8 @@
 		'Change' => 'Change profile picture',
 		'Select' => 'Select what is shown as the homepage',
 		'Submit' => 'Submit',
-		'Save' => 'Save'
+		'Save' => 'Save',
+		'Add' => 'Add friend'
 	]
 
 ?>
