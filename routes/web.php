@@ -15,3 +15,5 @@ Route::resource('/users', 'UserController')->middleware('auth');
 Route::get('/seed', 'GameController@seededGame');
 Route::get('/game', 'GameController@randomGame');
 Route::get('/daily', 'GameController@dailyGame')->middleware('auth');
+
+Route::get('/locale', 'LangController@change');

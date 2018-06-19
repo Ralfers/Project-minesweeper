@@ -16,6 +16,8 @@ class HomeController extends Controller
         	return \Route::dispatch($request)->getContent();
     	}
 
+        \App::setLocale($user->locale);
+
     	switch ($user->homepage) {
     		case 0:
 				$request = Request::create('/game', 'GET');

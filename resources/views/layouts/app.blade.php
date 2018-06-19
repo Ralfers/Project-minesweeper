@@ -27,7 +27,7 @@
         .mr-auto li a{
             text-decoration: none;
             color: grey;
-            padding-left: 25px;
+            padding-left: 10px;
         }
         .padded-content {
             width:1000px;
@@ -59,23 +59,23 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li>
-                            <a href="{{ url('/game') }}">Play a random game</a>
+                            <a href="{{ url('/game') }}">@lang('layout.Random') | </a>
                         </li>
                         <li>
-                            <a href="{{ url('/daily') }}">Daily challange</a>
+                            <a href="{{ url('/daily') }}">@lang('layout.Daily') | </a>
                         </li>
                         <li>
-                            <a href="{{ url('/scores') }}">View scores</a>
+                            <a href="{{ url('/scores') }}">@lang('layout.Scores') | </a>
                         </li>
                         <li>
-                            <a href="{{ url('/users') }}">Find user</a>
+                            <a href="{{ url('/users') }}">@lang('layout.Find') | </a>
                         </li>
                         <li>
-                            <a href="{{ url('/seed') }}">Enter a seed</a>
+                            <a href="{{ url('/seed') }}">@lang('layout.Seed')</a>
                         </li>
                         <li>
                             @if(Auth::user())
-                                <a href="{{ url('/users/'.Auth::user()->id) }}">Profile page</a>
+                                <a href="{{ url('/users/'.Auth::user()->id) }}"> | @lang('layout.Profile')</a>
                             @endif
                         </li>
                     </ul>
@@ -85,10 +85,10 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('auth.Login') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('auth.Register') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
@@ -100,7 +100,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('auth.Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -109,6 +109,10 @@
                                 </div>
                             </li>
                         @endguest
+                    </ul>
+                    <ul class="language-change">
+                        <a href="javascript:;" onclick="changeLang('en')" class="language-link">en</a>
+                        <a href="javascript:;" onclick="changeLang('lv')" class="language-link">lv</a>
                     </ul>
                 </div>
             </div>
@@ -121,4 +125,17 @@
         </main>
     </div>
 </body>
+
+<script>
+
+    function changeLang(lang)
+    {
+        
+        console.log(lang);
+
+        window.location = '/locale?lang='+lang;
+        //location.reload();
+    }
+</script>
+
 </html>

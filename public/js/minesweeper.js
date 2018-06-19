@@ -8,7 +8,6 @@ class Minesweeper {
 			var date = new Date();
 			this.seed = date.toDateString();
 		}
-		console.log(this.seed);
 		this.size = 10;
 		this.time = 120;
 		this.mineCount = Math.ceil(this.size * 1.5);
@@ -138,7 +137,6 @@ class Minesweeper {
 		return this.random[pos] % (this.size * this.size);
 	}
 	gameTick() {
-		console.log(this.playing);
 		if(this.playing){
 			this.time--;
 			this.timer.html('Time: '+this.time);

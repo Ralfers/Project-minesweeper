@@ -4,28 +4,28 @@
 
 	<div class="user-content" style="margin-right: 200px;">
 		<p>
-			Games played: {{ $count }}
+			@lang('profile-page.GP'): {{ $count }}
 		</p>
 		<p>
-			Most recent games: 
+			@lang('profile-page.Recent'): 
 		</p>
 		<table class='score-list'>
 			<tr>
-				<th>Time played</th>
-				<th>Score</th>
-				<th>Daily</th>
+				<th>@lang('scores.TP')</th>
+				<th>@lang('scores.S')</th>
+				<th>@lang('scores.D')</th>
 			</tr>
 			@foreach($games as $game)
 				<tr>
 					<td>{{ $game->created_at }}</td>
 					<td>{{ $game->score }}</td>
-					<td>{{ $game->is_daily ? 'yes' : 'no' }}</td>
+					<td>{{ $game->is_daily ? __('scores.Yes') : __('scores.No') }}</td>
 				</tr>
 			@endforeach
 		</table>
 	</div>
-	<div class="user-content" style="margin-right: 150px;">
-		<p>Friends:</p>
+	<div class="user-content" style="margin-right: 100px;">
+		<p>@lang('profile-page.F'):</p>
 		@foreach($friends as $friend)
 			<p><a href="/users/{{ $friend->id }}">{{ $friend->name }}</a></p>
 		@endforeach
@@ -39,17 +39,17 @@
 	<div class='user-content'>
 		<img src="{{ $link }}" style="max-height: 100px; max-width: 100px;"><br>
 		@if($editable)
-			Change profile picture:<br>
+			@lang('profile-page.Change'):<br>
 			<input type="text" id="avatar-link">
-			<input type="button" value="Submit" onclick="changeAvatar()"><br><br>
-			Select what is shown as the homepage:<br>
+			<input type="button" value="@lang('profile-page.Submit')" onclick="changeAvatar()"><br><br>
+			@lang('profile-page.Select'):<br>
 			<select id="home-select">
-				<option value="0">Random game</option>
-				<option value="1">Daily game</option>
-				<option value="2">View scores</option>
-				<option value="3">Profile page</option>
+				<option value="0">@lang('layout.Random')</option>
+				<option value="1">@lang('layout.Daily')</option>
+				<option value="2">@lang('layout.Scores')</option>
+				<option value="3">@lang('layout.Profile')</option>
 			</select> 
-			<input type="button" value="save" onclick="changeHome()">
+			<input type="button" value="@lang('profile-page.Save')" onclick="changeHome()">
 		@endif
 	</div>
 

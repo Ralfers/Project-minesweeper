@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
 
-	<p>Enter the username:</p>
-	<p class='error'></p>
-	<input id='username' type='text'><br><br>
-	<input type='button' value='Search' onclick="searchUser()">
+	<p>@lang('find-user.Enter'):</p>
+	<p class="error"></p>
+	<input id="username" type="text"><br><br>
+	<input type="button" value="@lang('find-user.Search')" onclick="searchUser()">
 
 	<script>	
 		function searchUser(){

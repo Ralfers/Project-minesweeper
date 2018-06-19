@@ -5,9 +5,9 @@
 		<div class="user-content" style="margin-right: 200px;">
 			<table class="score-list">
 				<tr>
-					<th>Time played</th>
-					<th>Score</th>
-					<th>Daily</th>
+					<th>@lang('scores.TP')</th>
+					<th>@lang('scores.S')</th>
+					<th>@lang('scores.D')</th>
 				</tr>
 				@foreach($scores as $score)
 					<tr>
@@ -22,17 +22,17 @@
 	<div class="user-content">
 		<table class="score-list">
 			<tr>
-				<th>Player name</th>
-				<th>Time played</th>
-				<th>Score</th>
-				<th>Daily</th>
+				<th>@lang('scores.Name')</th>
+				<th>@lang('scores.TP')</th>
+				<th>@lang('scores.S')</th>
+				<th>@lang('scores.D')</th>
 			</tr>
 			@foreach($userScores as $score)
 				<tr>
 					<td>{{ $score->user->name }}</td>
 					<td>{{ $score->created_at }}</td>
 					<td>{{ $score->score }}</td>
-					<td>{{ $score->is_daily ? 'yes' : 'no' }}</td>
+					<td>{{ $score->is_daily ? __('scores.Yes') : __('scores.No') }}</td>
 					@if(Auth::user()->role == 1)
 						<td><a href="javascript:;" onclick="removeScore({{ $score->id }})">X</a></td>
 					@endif
