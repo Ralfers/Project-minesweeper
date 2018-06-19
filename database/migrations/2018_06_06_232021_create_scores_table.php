@@ -17,7 +17,7 @@ class CreateScoresTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id');
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('score');
             $table->boolean('is_daily');
         });
